@@ -1,0 +1,11 @@
+.fav-record .delete-record {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: darkred;
+    font-size: 2em;
+}
+
+.fav-record td {
+    border: 1px solid black;
+}

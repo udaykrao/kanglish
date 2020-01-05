@@ -1,0 +1,23 @@
+.english-input * {
+    font-size: 1em;
+}
+
+.english-input > input {
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 5px;
+    margin-right: 5px;
+}
+
+.english-input > button {
+    border-radius: 5px;
+    background-color: rgb(184, 184, 184);
+    cursor: not-allowed;
+    padding: 5px;
+    border: 1px solid black;
+}
+
+.english-input > button.is-ready {
+    background-color: lightgreen;
+    cursor: pointer;
+}
