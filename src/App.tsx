@@ -8,7 +8,6 @@ import {
   createFavorite,
   deleteFavorite,
   getFavorites,
-  reorderFavorite,
   translate
 } from './api';
 import Favorite from './Favorite';
