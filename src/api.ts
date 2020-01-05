@@ -43,13 +43,14 @@ export async function isAuthenticated(): Promise<boolean> {
     .catch(() => undefined);
 }
 
-export async function getFavorites(): Promise<Favorite[]> {
+export async function getFavorites(): Promise<Favorite[]|undefined> {
     return fetch(`${endpoint}/favorites`, {
         method: 'GET',
         headers: {
             Authorization: `Bearer ${getToken()}`
         }
-    }).then(resp => resp.json());
+    }).then(resp => resp.json())
+    .catch(() => undefined);
 }
 
 export async function deleteFavorite(fav: Favorite): Promise<Response> {
@@ -72,7 +73,7 @@ export async function createFavorite(fav: Favorite): Promise<Response> {
     });
 }
 
-export async function reorderFavorite(fav: Favorite, newRank: number): Promise<Favorite[]> {
+export async function reorderFavorite(fav: Favorite, newRank: number): Promise<Favorite[]|undefined> {
     return fetch(`${endpoint}/favorites`, {
         method: 'PATCH',
         body: JSON.stringify({ oldRank: fav.rank, newRank }),

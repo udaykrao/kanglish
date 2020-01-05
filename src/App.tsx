@@ -58,7 +58,14 @@ class App extends React.Component<{}, AppState> {
           // Get favorites
           return getFavorites()
             // Set our favorites
-            .then(favs => this.setState({ favorites: favs }))
+            .then(favs => {
+              if (favs === undefined) {
+                document.cookie = 'token=';
+                window.location.reload();
+              } else {
+                this.setState({ favorites: favs });
+              }
+            })
             // We've finished loading!
             .then(() => this.setState({ initialLoading: false }));
         }
@@ -82,7 +89,14 @@ class App extends React.Component<{}, AppState> {
           });
         } else {
           return getFavorites()
-            .then(favs => this.setState({ favorites: favs }))
+            .then(favs => {
+              if (favs === undefined) {
+                document.cookie = 'token=';
+                window.location.reload();
+              } else {
+                this.setState({ favorites: favs });
+              }
+            })
             .then(() => this.setState({
               initialLoading: false,
               isLoggedIn: true,
@@ -135,32 +149,36 @@ class App extends React.Component<{}, AppState> {
     return (
       <div className="kanglish">
         <h1>Welcome to Kanglish!</h1>
-        <h2><em>Favorites</em></h2>
-        <table className="fav-translations">
-          <thead>
-            <tr>
-              <th></th>
-              <th>English</th>
-              <th>Kannada</th>
-            </tr>
-          </thead>
-          <tbody>
-            {favs}
-          </tbody>
-        </table>
-        <div className="translator">
-          <h2><em>Translate</em></h2>
-          <EnglishInput 
-            text={text}
-            onChange={this.onInputChange}
-            onKannadize={() => {
-              translate(text)
-                .then(kantext => this.setState({kantext}));
-            }}  
-          />
-          <KannadaOutput kantext={kantext} onClick={this.onCreate} />
+        <div className="kanglish-ui">
+          <div className="translator">
+            <h2><em>Translate</em></h2>
+            <EnglishInput 
+              text={text}
+              onChange={this.onInputChange}
+              onKannadize={() => {
+                translate(text)
+                  .then(kantext => this.setState({kantext}));
+              }}  
+            />
+            <KannadaOutput kantext={kantext} onClick={this.onCreate} />
+          </div>
+          <div className="favs">
+          <h2><em>Favorites</em></h2>
+            <table className="fav-translations">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>English</th>
+                  <th>Kannada</th>
+                </tr>
+              </thead>
+              <tbody>
+                {favs}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>  
+      </div>
     );
   }
 }

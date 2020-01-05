@@ -26,3 +26,15 @@
 .translator h2 {
     margin: 0;
 }
+
+.kanglish-ui {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.favs {
+    margin-left: 10px;
+    margin-right: 10px;
+}
